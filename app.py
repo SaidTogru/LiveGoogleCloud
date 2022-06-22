@@ -1,6 +1,3 @@
-import io
-import base64
-import numpy as np
 from flask import Flask, render_template, Response, request
 import cv2
 import time
@@ -189,16 +186,6 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/get_frame', methods=['POST'])
-def get_image():
-    global current_frame
-    image_b64 = request.values['imageBase64']
-    imgdata = image_b64.split(',')[1]
-    decoded = base64.b64decode(imgdata)
-    current_frame = np.array(Image.open(io.BytesIO(decoded)).convert('RGB'))
-    return ''
-
-
 @ app.route('/video_feed')
 def video_feed():
     return Response(redirect_frame(),
@@ -216,18 +203,6 @@ def get_pause():
     global pause
     pause = request.form['status']
     return pause
-
-
-@ app.route('/stream_mode', methods=['POST', 'GET'])
-def get_stream_mode():
-    global stream_mode
-    global current_video
-    stream_mode = request.form['status']
-    if stream_mode == 'webcam':
-        loadvideo(0)
-    else:
-        loadvideo(f"video/{current_video}.mp4")
-    return stream_mode
 
 
 @ app.route('/next', methods=['POST'])

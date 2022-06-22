@@ -45,14 +45,7 @@ function getCurrentFrame() {
     }
 }
 
-function frameLoop() {
-    setTimeout(function() {
-        getCurrentFrame();
-        if (stream_mode == "webcam") {
-            frameLoop();
-        }
-    }, 100)
-}
+
 
 async function changeBackgroundColor(btn) {
     origin_color = getComputedStyle(document.querySelector("#" + btn)).backgroundColor;
@@ -74,61 +67,6 @@ async function changeBackgroundColor(btn) {
     });
 }
 
-$("#webcam").click(function(_callback) {
-    if (!mobile && $("#webcam").css("pointer-events") == "auto" && $('.switch-button-checkbox').is(':checked')) {
-        $("#webcam").css("pointer-events", "none");
-        if (stream_mode == "video") {
-            activateLoadingStream();
-            $("#status").text("Status: checking webcam");
-            if (navigator.getUserMedia) {
-                navigator.getUserMedia({
-                        video: true,
-                        audio: false
-                    },
-
-                    function(stream) {
-                        webcamWidth = stream.getVideoTracks()[0].getSettings().width
-                        webcamHeight = stream.getVideoTracks()[0].getSettings().height
-                        canvas.setAttribute('width', webcamWidth);
-                        canvas.setAttribute('height', webcamHeight);
-                        video.srcObject = stream
-                        stream_mode = "webcam"
-                        $("#next").text("Deactivated");
-                        $("#next").css("pointer-events", "none");
-                        frameLoop();
-                        $.post("/stream_mode", {
-                            status: stream_mode
-                        });
-                        deactivateLoadingStream();
-                    },
-                    function(err) {
-                        $('.switch-button-checkbox').prop('checked', false);
-                        showalert("Permission is denied. You must allow access.");
-                        deactivateLoadingStream();
-                    }
-                );
-            } else {
-                $('.switch-button-checkbox').prop('checked', false);
-                showalert("We couldnt found a webcam.");
-                deactivateLoadingStream();
-            }
-        }
-    } else {
-        loadingStream("change_mode", 1800);
-        stream_mode = "video"
-        $("#next").text("Next Video");
-        $("#next").css("pointer-events", "auto");
-        $.post("/stream_mode", {
-            status: stream_mode
-        });
-    }
-    pause = false;
-    $("#webcam").css("pointer-events", "auto");
-    $.post("/pause", {
-        status: pause
-    });
-    $("#status").text("Status: running");
-});
 
 $("#next").click(function() {
     if (stream_mode == "video") {
