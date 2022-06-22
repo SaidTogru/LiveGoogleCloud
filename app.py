@@ -27,7 +27,7 @@ models = {
 
 }
 
-application = Flask(__name__, template_folder='./')
+app = Flask(__name__, template_folder='./')
 pause = "false"
 stream_mode = "video"
 current_model = "1"
@@ -184,12 +184,12 @@ def redirect_frame():
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
-@ application.route('/')
+@ app.route('/')
 def index():
     return render_template('index.html')
 
 
-@application.route('/get_frame', methods=['POST'])
+@app.route('/get_frame', methods=['POST'])
 def get_image():
     global current_frame
     image_b64 = request.values['imageBase64']
@@ -199,26 +199,26 @@ def get_image():
     return ''
 
 
-@ application.route('/video_feed')
+@ app.route('/video_feed')
 def video_feed():
     return Response(redirect_frame(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@ application.route('/graph_plot')
+@ app.route('/graph_plot')
 def graph_plot():
     return Response(redirect_plot(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@ application.route('/pause', methods=['POST'])
+@ app.route('/pause', methods=['POST'])
 def get_pause():
     global pause
     pause = request.form['status']
     return pause
 
 
-@ application.route('/stream_mode', methods=['POST', 'GET'])
+@ app.route('/stream_mode', methods=['POST', 'GET'])
 def get_stream_mode():
     global stream_mode
     global current_video
@@ -230,7 +230,7 @@ def get_stream_mode():
     return stream_mode
 
 
-@ application.route('/next', methods=['POST'])
+@ app.route('/next', methods=['POST'])
 def get_current_video():
     global current_video
     global pause
@@ -239,7 +239,7 @@ def get_current_video():
     return current_video
 
 
-@ application.route('/set_current_model', methods=['POST'])
+@ app.route('/set_current_model', methods=['POST'])
 def set_current_model():
     global current_model
     current_model = request.form['status']
@@ -248,4 +248,4 @@ def set_current_model():
 
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80)
