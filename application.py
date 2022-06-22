@@ -75,8 +75,7 @@ def loadvideo(x):
     global start
     start = time.time()
     videoname = x
-    if videoname != 0:
-        video = cv2.VideoCapture(videoname)
+    video = cv2.VideoCapture(videoname)
 
 
 def predict(img):
@@ -249,4 +248,4 @@ def set_current_model():
 
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0', port=80)
+    application.run()
