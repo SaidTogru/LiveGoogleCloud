@@ -248,4 +248,4 @@ def set_current_model():
 
 
 if __name__ == '__main__':
-    application.run()
+    application.run(host='0.0.0.0', port=80)
