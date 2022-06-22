@@ -1,0 +1,30 @@
+steps:
+  # Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "gcr.io/kinetic-physics-354107/facialexpressionrecognition",
+        ".",
+      ]
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/kinetic-physics-354107/facialexpressionrecognition"]
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "appservice",
+        "--image",
+        "gcr.io/kinetic-physics-354107/facialexpressionrecognition",
+        "--region",
+        "europe-west3",
+        "--port",
+        "80",
+      ]
+images:
+  - gcr.io/kinetic-physics-354107/facialexpressionrecognition
