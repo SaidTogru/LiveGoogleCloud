@@ -3,21 +3,7 @@ var stream_mode = "video";
 var pause = false;
 var next = 1;
 var mobile = false;
-var canvas
-var ctx
-var video;
-var webcamWidth;
-var webcamHeight;
-canvas = document.createElement('canvas')
-video = document.createElement('video')
-video.setAttribute('autoplay', true)
-ctx = canvas.getContext('2d')
-navigator.getUserMedia = (
-    navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msGetUserMedia
-);
+
 
 $('#pause').on('click', function() {
     pause = !pause
@@ -30,22 +16,6 @@ $('#pause').on('click', function() {
         status: pause
     });
 });
-
-function getCurrentFrame() {
-    if (!pause) {
-        img = ctx.drawImage(video, 0, 0)
-        img_dataURI = canvas.toDataURL('image/png')
-        $.ajax({
-            type: "POST",
-            url: "/get_frame",
-            data: {
-                imageBase64: img_dataURI
-            }
-        })
-    }
-}
-
-
 
 async function changeBackgroundColor(btn) {
     origin_color = getComputedStyle(document.querySelector("#" + btn)).backgroundColor;
