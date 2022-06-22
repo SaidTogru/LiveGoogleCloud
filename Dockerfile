@@ -6,9 +6,12 @@ ENV HOST 0.0.0.0
 EXPOSE 80
 
 RUN apt-get update -y && \
-    apt-get install -y python3-pip
+    apt-get install -y python3-pip 
 
-RUN apt-get install mesa-libGL
+RUN apt install libgl1-mesa-glx -y
+RUN apt-get install 'ffmpeg'\
+    'libsm6'\
+    'libxext6'  -y
 
 COPY ./requirements.txt /app/requirements.txt
 
