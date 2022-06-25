@@ -140,7 +140,7 @@ function printMousePos(e) {
     }
     var rect = document.getElementById("github1").getBoundingClientRect();
     if (cursorX > rect.left && cursorX < rect.right && cursorY > rect.top && cursorY < rect.bottom) {
-        window.open("https://www.yourURL.com", "_blank");
+        window.open("https://github.com/SaidTogru/Facial-expression-recognition-web-application/blob/main/training/DACL.py", "_blank");
     }
     var rect = document.getElementById("paper1").getBoundingClientRect();
     if (cursorX > rect.left && cursorX < rect.right && cursorY > rect.top && cursorY < rect.bottom) {
@@ -165,7 +165,7 @@ function printMousePos(e) {
     }
     var rect = document.getElementById("github2").getBoundingClientRect();
     if (cursorX > rect.left && cursorX < rect.right && cursorY > rect.top && cursorY < rect.bottom) {
-        window.open("https://www.yourURL.com", "_blank");
+        window.open("https://github.com/SaidTogru/Facial-expression-recognition-web-application/blob/main/training/DAN.py", "_blank");
     }
     var rect = document.getElementById("paper2").getBoundingClientRect();
     if (cursorX > rect.left && cursorX < rect.right && cursorY > rect.top && cursorY < rect.bottom) {
@@ -189,7 +189,7 @@ function printMousePos(e) {
     }
     var rect = document.getElementById("github3").getBoundingClientRect();
     if (cursorX > rect.left && cursorX < rect.right && cursorY > rect.top && cursorY < rect.bottom) {
-        window.open("https://www.yourURL.com", "_blank");
+        window.open("https://github.com/SaidTogru/Facial-expression-recognition-web-application/blob/main/training/DeepEmotion.py", "_blank");
     }
     var rect = document.getElementById("paper3").getBoundingClientRect();
     if (cursorX > rect.left && cursorX < rect.right && cursorY > rect.top && cursorY < rect.bottom) {
@@ -214,7 +214,7 @@ function printMousePos(e) {
     }
     var rect = document.getElementById("github4").getBoundingClientRect();
     if (cursorX > rect.left && cursorX < rect.right && cursorY > rect.top && cursorY < rect.bottom) {
-        window.open("https://www.yourURL.com", "_blank");
+        window.open("https://github.com/SaidTogru/Facial-expression-recognition-web-application/blob/main/training/BasicNet.py", "_blank");
     }
     var rect = document.getElementById("paper4").getBoundingClientRect();
     if (cursorX > rect.left && cursorX < rect.right && cursorY > rect.top && cursorY < rect.bottom) {
